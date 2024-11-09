@@ -9,6 +9,7 @@ but only Java standard libraries are used.
 - [ ] Moving map in the background
 - [ ] NPCs 
 - [ ] Entertaining fight system
+- [ ] Much more...
 
 ## Resources
 

@@ -13,8 +13,7 @@ but only Java standard libraries are used.
 
 ## Resources
 
-We use [Piskel](https://www.piskelapp.com/) for designing pixelart. This project 
-should be compatible with every IDE (I hope).
+We use [Piskel](https://www.piskelapp.com/) for designing pixelart. 
 
 More Information coming soon...
 

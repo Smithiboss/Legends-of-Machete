@@ -17,3 +17,8 @@ We use [Piskel](https://www.piskelapp.com/) for designing pixelart.
 
 More Information coming soon...
 
+## Contributors
+
+- [Schimoi](https://github.com/Schimoi)
+- [V3geta02](https://github.com/V3geta02)
+

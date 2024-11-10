@@ -33,7 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-
+    // creates and starts new Thread
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -70,12 +70,12 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
-
+    // updates everything on the screen
     public void update() {
 
         player.update();
     }
-
+    // initializes graphics and draws everything in the screen
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);

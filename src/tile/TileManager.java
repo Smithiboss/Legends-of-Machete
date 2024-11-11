@@ -32,20 +32,15 @@ public class TileManager {
 
     public void draw(Graphics2D g2) {
 
-        int row = 0;
-        int col = 0;
         int x = 0;
         int y = 0;
 
-        while (row < gp.maxScreenRow && col < gp.maxScreenCol) {
+        while (x < gp.screenWidth && y < gp.screenHeight) {
             g2.drawImage(tile[0].image, x, y, gp.tileSize, gp.tileSize, null);
             x += gp.tileSize;
-            col++;
-            if (col == gp.maxScreenCol) {
-                col = 0;
+            if (x == gp.screenWidth) {
                 x = 0;
                 y += gp.tileSize;
-                row++;
             }
 
 

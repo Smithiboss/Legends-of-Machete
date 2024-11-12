@@ -5,6 +5,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class GamePanel extends JPanel implements Runnable{
 

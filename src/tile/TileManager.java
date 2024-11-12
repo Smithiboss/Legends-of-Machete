@@ -61,23 +61,17 @@ public class TileManager {
 
         int x = 0;
         int y = 0;
-        int col = 0;
-        int row = 0;
 
+        while (x < gp.screenWidth && y < gp.screenHeight) {
 
-        while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
-
-            int tileNum = mapTileNum[row][col]; // always contains one number throughout iteration
+            int tileNum = mapTileNum[y/gp.tileSize][x/gp.tileSize]; // always contains one number throughout iteration
 
             g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null); // draws the tile
-            col++;
             x += gp.tileSize;
             // changes row
             if (x == gp.screenWidth) {
-                col = 0;
                 x = 0;
                 y += gp.tileSize;
-                row++;
             }
         }
     }

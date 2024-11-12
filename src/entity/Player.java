@@ -20,6 +20,7 @@ public class Player extends Entity{
         this.keyH = keyH;
         setDefaultValues();
         getPlayerImage();
+
     }
 
     public void setDefaultValues() {
@@ -28,10 +29,11 @@ public class Player extends Entity{
         y = 100; // default y value
         speed = gp.playerSpeed;
         direction = "down"; // default direction
-    }
 
+    }
+    // loads every image of player from /res
     public void getPlayerImage() {
-        // loads every image of player from /res
+
         try {
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_down1.png")));
             down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_down2.png")));
@@ -44,9 +46,10 @@ public class Player extends Entity{
 
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
-
+    // update function for player
     public void update() {
         // moves the player in given direction
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
@@ -73,13 +76,13 @@ public class Player extends Entity{
                     animationCounter = 2;
                 }
                 animationTime = 0;
+
             }
         }
-
-
     }
 
     public void draw(Graphics2D g2) {
+
         BufferedImage image = null;
         // determines which player frame must be drawn
         switch (direction) {
@@ -115,8 +118,10 @@ public class Player extends Entity{
                     image = right2;
                 }
                 break;
+
         }
         // draws player in the game panel
         g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+
     }
 }

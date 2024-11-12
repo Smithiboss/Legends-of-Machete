@@ -18,11 +18,11 @@ public class TileManager {
 
         this.gp = gp;
         tile = new Tile[10];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gp.maxScreenRow][gp.maxScreenCol];
         getTileImage();
         loadMap();
     }
-
+    // loads every tile into tile array
     public void getTileImage() {
         try {
             tile[0] = new Tile();
@@ -33,30 +33,30 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-
+    // loads the map
     public void loadMap() {
 
-        int col = 0;
+        int col;
         int row = 0;
 
         try {
-            InputStream path = getClass().getResourceAsStream("/maps/map01.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(path));
+            InputStream path = getClass().getResourceAsStream("/maps/map01.txt"); // gets map file path
+            BufferedReader reader = new BufferedReader(new InputStreamReader(path)); // initialize buffered reader
             String line;
             while ((line = reader.readLine())!=null && row < gp.maxScreenRow) {
-                String[] numbers = line.split(" ");
+                String[] numbers = line.split(" "); // reads a line of the map
                 for (col=0; col < gp.maxScreenCol; col++) {
-                    mapTileNum[col][row] = Integer.parseInt(numbers[col]);
+                    mapTileNum[row][col] = Integer.parseInt(numbers[col]); // parses the numbers to the main array
                 }
                 row++;
             }
             reader.close();
-            System.out.println(Arrays.deepToString(mapTileNum));
+            System.out.println(Arrays.deepToString(mapTileNum)); // for debugging
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    // draws the loaded array into the game panel
     public void draw(Graphics2D g2) {
 
         int x = 0;
@@ -67,23 +67,18 @@ public class TileManager {
 
         while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
 
-            int tileNum = mapTileNum[col][row];
+            int tileNum = mapTileNum[row][col]; // always contains one number throughout iteration
 
-            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null); // draws the tile
             col++;
             x += gp.tileSize;
-
+            // changes row
             if (x == gp.screenWidth) {
                 col = 0;
                 x = 0;
                 y += gp.tileSize;
                 row++;
             }
-
-
         }
-
-
-
     }
 }

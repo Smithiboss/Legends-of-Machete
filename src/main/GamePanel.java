@@ -19,19 +19,25 @@ public class GamePanel extends JPanel implements Runnable{
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
-    public final int FPS = 120; // supports up to 240 FPS (see playerSpeed)
-    public int playerSpeed = 240/FPS; // calculates the speed in relation to the FPS
+    // World Settings
+    public final int maxWorldCol = 64;
+    public final int maxWorldRow = 23;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
+
+    public final int FPS = 60; // supports up to 240 FPS (see playerSpeed)
+    public int playerSpeed = 4; // calculates the speed in relation to the FPS
 
     Thread gameThread;
     KeyHandler keyH = new KeyHandler();
-    Player player = new Player(this, keyH);
+    public Player player = new Player(this, keyH);
     TileManager tileM = new TileManager(this);
 
     public GamePanel() {
 
         // sets the preferred size to the calculated height and width
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        // this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);

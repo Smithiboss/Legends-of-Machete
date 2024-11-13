@@ -18,7 +18,7 @@ public class TileManager {
 
         this.gp = gp;
         tile = new Tile[10];
-        mapTileNum = new int[gp.maxScreenRow][gp.maxScreenCol];
+        mapTileNum = new int[gp.maxWorldRow][gp.maxWorldCol];
         getTileImage();
         loadMap();
     }
@@ -43,9 +43,9 @@ public class TileManager {
             InputStream path = getClass().getResourceAsStream("/maps/map01.txt"); // gets map file path
             BufferedReader reader = new BufferedReader(new InputStreamReader(path)); // initialize buffered reader
             String line;
-            while ((line = reader.readLine())!=null && row < gp.maxScreenRow) {
+            while ((line = reader.readLine())!=null && row < gp.maxWorldRow) {
                 String[] numbers = line.split(" "); // reads a line of the map
-                for (col=0; col < gp.maxScreenCol; col++) {
+                for (col=0; col < gp.maxWorldCol; col++) {
                     mapTileNum[row][col] = Integer.parseInt(numbers[col]); // parses the numbers to the main array
                 }
                 row++;
@@ -59,19 +59,29 @@ public class TileManager {
     // draws the loaded array into the game panel
     public void draw(Graphics2D g2) {
 
-        int x = 0;
-        int y = 0;
 
-        while (x < gp.screenWidth && y < gp.screenHeight) {
+        int worldCol = 0;
+        int worldRow = 0;
 
-            int tileNum = mapTileNum[y/gp.tileSize][x/gp.tileSize]; // always contains one number throughout iteration
+        while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
-            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null); // draws the tile
-            x += gp.tileSize;
+            int tileNum = mapTileNum[worldRow][worldCol]; // always contains one number throughout iteration
+
+            int x = worldCol * gp.tileSize; // calculates the x coordinate of a tile on the world map
+            int y = worldRow * gp.tileSize; // calculates the y coordinate of a tile on the world map
+            // calculates where to draw the tile on the screen
+            int screenX = x - gp.player.worldX + gp.player.screenX;
+            int screenY = y - gp.player.worldY + gp.player.screenY;
+            // if the position of the tile is in the specified range of the player it draws the tile on the screen
+            if (x + gp.tileSize > gp.player.worldX - gp.player.screenX && x - gp.tileSize < gp.player.worldX + gp.player.screenX &&
+                   y + gp.tileSize > gp.player.worldY - gp.player.screenY && y - gp.tileSize < gp.player.worldY + gp.player.screenY) {
+                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+                }  // draws the tile
+            worldCol++;
             // changes row
-            if (x == gp.screenWidth) {
-                x = 0;
-                y += gp.tileSize;
+            if (worldCol == gp.maxWorldCol) {
+                worldCol = 0;
+                worldRow++;
             }
         }
     }

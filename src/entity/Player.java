@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import utils.HelpMethods;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class Player extends Entity{
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
+        super();
 
         this.gp = gp;
         this.keyH = keyH;
@@ -26,6 +28,7 @@ public class Player extends Entity{
         screenY = gp.screenHeight/2 - gp.tileSize/2;
 
         setDefaultValues();
+
         getPlayerImage();
 
     }
@@ -38,6 +41,7 @@ public class Player extends Entity{
         direction = "down"; // default direction
 
     }
+
     // loads every image of player from /res
     public void getPlayerImage() {
 
@@ -60,26 +64,35 @@ public class Player extends Entity{
     public void update() {
         // moves the player in given direction
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
-            if (keyH.upPressed) {
+
+            int xSpeed = 0, ySpeed = 0;
+
+            if (keyH.upPressed && !keyH.downPressed) {
                 direction = "up";
-                worldY -= speed;
-            } else if (keyH.leftPressed) {
+                ySpeed -= speed;
+            } else if (keyH.leftPressed && !keyH.rightPressed) {
                 direction = "left";
-                worldX -= speed;
-            } else if (keyH.downPressed) {
+                xSpeed -= speed;
+            } else if (keyH.downPressed && !keyH.upPressed) {
                 direction = "down";
-                worldY += speed;
-            } else {
+                ySpeed += speed;
+            } else if (keyH.rightPressed && !keyH.leftPressed){
                 direction = "right";
-                worldX += speed;
+                xSpeed += speed;
             }
+            if (HelpMethods.canMove(worldX + xSpeed, worldY + ySpeed, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
+                this.worldX += (int) xSpeed;
+                this.worldY += (int) ySpeed;
+                updateHitbox(screenX, screenY);
+            }
+
+
             animationTime++;
             // changes the player frame
             if (animationTime > gp.FPS/6) {
                 if (animationCounter == 2) {
                     animationCounter = 1;
-                }
-                else {
+                } else {
                     animationCounter = 2;
                 }
                 animationTime = 0;
@@ -129,6 +142,7 @@ public class Player extends Entity{
         }
         // draws player in the game panel
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        drawHitbox(g2);
 
     }
 }

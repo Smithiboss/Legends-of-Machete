@@ -10,10 +10,10 @@ import java.io.FileNotFoundException;
 public class GamePanel extends JPanel implements Runnable{
 
     // Screen Settings
-    final int originalTileSize = 16; // 16x16 pixels
-    final int scale = 3; // scale for tile scaling
+    static final int originalTileSize = 16; // 16x16 pixels
+    static final int scale = 3; // scale for tile scaling
 
-    public int tileSize = originalTileSize * scale; // 48x48 pixels
+    public static final int tileSize = originalTileSize * scale; // 48x48 pixels
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     KeyHandler keyH = new KeyHandler();
     public Player player = new Player(this, keyH);
-    TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
 
     public GamePanel() {
 

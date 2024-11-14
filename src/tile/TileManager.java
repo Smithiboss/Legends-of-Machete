@@ -11,8 +11,8 @@ import java.util.Objects;
 public class TileManager {
 
     GamePanel gp;
-    Tile[] tile;
-    int[][] mapTileNum;
+    public static Tile[] tile;
+    public int[][] mapTileNum;
 
     public TileManager(GamePanel gp) {
 
@@ -25,10 +25,8 @@ public class TileManager {
     // loads every tile into tile array
     public void getTileImage() {
         try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
+            tile[0] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png"))), false);
+            tile[1] = new Tile(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png"))), true);
         }catch (IOException e) {
             e.printStackTrace();
         }

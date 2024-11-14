@@ -19,16 +19,21 @@ public class Player extends Entity{
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        super();
 
         this.gp = gp;
         this.keyH = keyH;
+        // Hitbox Settings
+        xDrawOffset = 4 * gp.scale;
+        yDrawOffset = 8 * gp.scale;
+        width = 8 * gp.scale;
+        height = 8 * gp.scale;
+
 
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;
 
         setDefaultValues();
-
+        initHitbox(screenX, screenY, width, height);
         getPlayerImage();
 
     }
@@ -80,7 +85,7 @@ public class Player extends Entity{
                 direction = "right";
                 xSpeed += speed;
             }
-            if (HelpMethods.canMove(worldX + xSpeed, worldY + ySpeed, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
+            if (HelpMethods.canMove(worldX + xSpeed + xDrawOffset, worldY + ySpeed + yDrawOffset, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
                 this.worldX += (int) xSpeed;
                 this.worldY += (int) ySpeed;
                 updateHitbox(screenX, screenY);
@@ -142,7 +147,8 @@ public class Player extends Entity{
         }
         // draws player in the game panel
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
-        drawHitbox(g2);
+        // for debugging
+        // drawHitbox(g2);
 
     }
 }

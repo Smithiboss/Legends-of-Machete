@@ -5,13 +5,12 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 public class GamePanel extends JPanel implements Runnable{
 
     // Screen Settings
     static final int originalTileSize = 16; // 16x16 pixels
-    static final int scale = 3; // scale for tile scaling
+    public static final int scale = 3; // scale for tile scaling
 
     public static final int tileSize = originalTileSize * scale; // 48x48 pixels
     public final int maxScreenCol = 16;

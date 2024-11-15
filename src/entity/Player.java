@@ -22,11 +22,12 @@ public class Player extends Entity{
 
         this.gp = gp;
         this.keyH = keyH;
+
         // Hitbox Settings
         xDrawOffset = 4 * gp.scale;
-        yDrawOffset = 8 * gp.scale;
+        yDrawOffset = 10 * gp.scale;
         width = 8 * gp.scale;
-        height = 8 * gp.scale;
+        height = 6 * gp.scale;
 
 
         screenX = gp.screenWidth/2 - gp.tileSize/2;

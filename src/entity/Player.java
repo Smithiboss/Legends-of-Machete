@@ -73,16 +73,16 @@ public class Player extends Entity{
 
             int xSpeed = 0, ySpeed = 0;
 
-            if (keyH.upPressed && !keyH.downPressed) {
+            if (keyH.upPressed) {
                 direction = "up";
                 ySpeed -= speed;
-            } else if (keyH.leftPressed && !keyH.rightPressed) {
+            } else if (keyH.leftPressed) {
                 direction = "left";
                 xSpeed -= speed;
-            } else if (keyH.downPressed && !keyH.upPressed) {
+            } else if (keyH.downPressed) {
                 direction = "down";
                 ySpeed += speed;
-            } else if (keyH.rightPressed && !keyH.leftPressed){
+            } else {
                 direction = "right";
                 xSpeed += speed;
             }

@@ -4,7 +4,6 @@ import main.GamePanel;
 import utils.HelpingMethods;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -22,6 +21,9 @@ public class UI_Heart {
         HelpingMethods.loadSprites(image, 16, 16, 3, sprites);
     }
 
+    /**
+     * Import the image containing heart sprites
+     */
     public void importImage() {
         try {
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/ui/heart_sprites.png")));

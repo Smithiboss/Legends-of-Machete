@@ -14,14 +14,16 @@ public class Player extends Entity{
 
     GamePanel gp;
     KeyHandler keyH;
+    HelpMethods helpM;
 
     public final int screenX;
     public final int screenY;
 
-    public Player(GamePanel gp, KeyHandler keyH) {
+    public Player(GamePanel gp, KeyHandler keyH, HelpMethods helpM) {
 
         this.gp = gp;
         this.keyH = keyH;
+        this.helpM = helpM;
 
         // Hitbox Settings
         xDrawOffset = 4 * gp.scale;
@@ -88,7 +90,7 @@ public class Player extends Entity{
                 direction = "none";
             }
 
-            if (HelpMethods.canMove(worldX + xSpeed + xDrawOffset, worldY + ySpeed + yDrawOffset, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
+            if (helpM.canMove(worldX + xSpeed + xDrawOffset, worldY + ySpeed + yDrawOffset, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
                 this.worldX += (int) xSpeed;
                 this.worldY += (int) ySpeed;
                 updateHitbox(screenX, screenY);

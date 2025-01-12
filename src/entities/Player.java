@@ -80,22 +80,22 @@ public class Player extends Entity{
 
             int xSpeed = 0, ySpeed = 0;
 
-            if (keyH.upPressed && !keyH.downPressed && !keyH.rightPressed && !keyH.leftPressed) {
+            if (keyH.upPressed && !keyH.downPressed) {
                 direction = "up";
                 ySpeed -= speed;
-            } else if (keyH.leftPressed && !keyH.rightPressed && !keyH.upPressed && !keyH.downPressed) {
+            }
+            if (keyH.leftPressed && !keyH.rightPressed) {
                 direction = "left";
                 xSpeed -= speed;
-            } else if (keyH.downPressed && !keyH.upPressed && !keyH.leftPressed && !keyH.rightPressed) {
+            }
+            if (keyH.downPressed && !keyH.upPressed) {
                 direction = "down";
                 ySpeed += speed;
-            } else if (keyH.rightPressed && !keyH.leftPressed && !keyH.downPressed && !keyH.upPressed) {
+            }
+            if (keyH.rightPressed && !keyH.leftPressed) {
                 direction = "right";
                 xSpeed += speed;
-            } else {
-                direction = "none";
             }
-
             if (helpM.canMove(worldX + xSpeed + xDrawOffset, worldY + ySpeed + yDrawOffset, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
                 this.worldX += (int) xSpeed;
                 this.worldY += (int) ySpeed;

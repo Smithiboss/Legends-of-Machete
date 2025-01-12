@@ -73,16 +73,16 @@ public class Player extends Entity{
 
             int xSpeed = 0, ySpeed = 0;
 
-            if (keyH.upPressed) {
+            if (keyH.upPressed && !keyH.downPressed && !keyH.rightPressed && !keyH.leftPressed) {
                 direction = "up";
                 ySpeed -= speed;
-            } else if (keyH.leftPressed) {
+            } else if (keyH.leftPressed && !keyH.rightPressed && !keyH.upPressed && !keyH.downPressed) {
                 direction = "left";
                 xSpeed -= speed;
-            } else if (keyH.downPressed) {
+            } else if (keyH.downPressed && !keyH.upPressed && !keyH.leftPressed && !keyH.rightPressed) {
                 direction = "down";
                 ySpeed += speed;
-            } else {
+            } else if (keyH.rightPressed && !keyH.leftPressed && !keyH.downPressed && !keyH.upPressed) {
                 direction = "right";
                 xSpeed += speed;
             }
@@ -91,7 +91,6 @@ public class Player extends Entity{
                 this.worldY += (int) ySpeed;
                 updateHitbox(screenX, screenY);
             }
-
 
             animationTime++;
             // changes the player frame

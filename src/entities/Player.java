@@ -1,4 +1,4 @@
-package entity;
+package entities;
 
 import main.GamePanel;
 import main.KeyHandler;
@@ -63,7 +63,6 @@ public class Player extends Entity{
 
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
     // update function for player
@@ -85,7 +84,10 @@ public class Player extends Entity{
             } else if (keyH.rightPressed && !keyH.leftPressed && !keyH.downPressed && !keyH.upPressed) {
                 direction = "right";
                 xSpeed += speed;
+            } else {
+                direction = "none";
             }
+
             if (HelpMethods.canMove(worldX + xSpeed + xDrawOffset, worldY + ySpeed + yDrawOffset, hitbox.width, hitbox.height, gp.tileM.mapTileNum)) {
                 this.worldX += (int) xSpeed;
                 this.worldY += (int) ySpeed;
@@ -101,7 +103,6 @@ public class Player extends Entity{
                     animationCounter = 2;
                 }
                 animationTime = 0;
-
             }
         }
     }
@@ -143,7 +144,9 @@ public class Player extends Entity{
                     image = right2;
                 }
                 break;
-
+            case "none":
+                image = down1;
+                break;
         }
         // draws player in the game panel
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);

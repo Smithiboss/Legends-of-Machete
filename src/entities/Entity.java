@@ -1,6 +1,4 @@
-package entity;
-
-import main.GamePanel;
+package entities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

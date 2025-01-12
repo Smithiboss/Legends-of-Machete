@@ -6,11 +6,15 @@ import java.util.Arrays;
 
 public class KeyHandler implements KeyListener {
 
+    GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+
+    public KeyHandler(GamePanel gp) {
+        this.gp = gp;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -22,6 +26,13 @@ public class KeyHandler implements KeyListener {
                 case KeyEvent.VK_A -> leftPressed = true;
                 case KeyEvent.VK_S -> downPressed = true;
                 case KeyEvent.VK_D -> rightPressed = true;
+                case KeyEvent.VK_ESCAPE -> {
+                    if (gp.gameState == gp.playState) {
+                        gp.gameState = gp.pauseState;
+                    } else if (gp.gameState == gp.pauseState) {
+                        gp.gameState = gp.playState;
+                    }
+                }
             }
     }
 

@@ -10,13 +10,22 @@ public class Entity {
     public String direction;
     public int xDrawOffset, yDrawOffset;
     public int width, height;
+
     // used for animation loop
     public int animationTime = 0; // time between a frame switch
     public int animationCounter = 1; // determines which frame is to be displayed
 
+    // Character life
+    public int maxLife;
+    public int currentLife;
+
+    // Hitbox
     protected Rectangle hitbox;
 
-    // for debugging
+    /**
+     * Draws the hitbox for debugging
+     * @param g2 Graphics2D
+     */
     protected void drawHitbox(Graphics g2) {
         g2.setColor(Color.pink);
         g2.drawRect(hitbox.x + xDrawOffset, hitbox.y + yDrawOffset, hitbox.width, hitbox.height);

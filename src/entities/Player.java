@@ -31,7 +31,7 @@ public class Player extends Entity{
         width = 8 * gp.scale;
         height = 6 * gp.scale;
 
-
+        // Position on the screen
         screenX = gp.screenWidth/2 - gp.tileSize/2;
         screenY = gp.screenHeight/2 - gp.tileSize/2;
 
@@ -41,12 +41,18 @@ public class Player extends Entity{
 
     }
 
+    /**
+     * Sets the default values for player
+     */
     public void setDefaultValues() {
 
         worldX = gp.tileSize * 30; // default x value
         worldY = gp.tileSize * 12; // default y value
         speed = gp.playerSpeed;
         direction = "down"; // default direction
+        maxLife = 6;
+        currentLife = maxLife;
+
 
     }
 

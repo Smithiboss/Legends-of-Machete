@@ -64,23 +64,11 @@ public class UI {
      */
     private void drawPlayerLife() {
 
-        gp.player.currentLife = 3;
+        gp.player.currentLife = 1;
 
         int x = gp.tileSize/4;
         int y = gp.tileSize/4;
         int i = 0;
-
-        // Draw max life with blank hearts
-        while (i < gp.player.maxLife/2) {
-            g2.drawImage(heart.sprites[2], x, y, null);
-            i++;
-            x += gp.tileSize - gp.tileSize/4;
-        }
-
-        // Reset
-        x = gp.tileSize/4;
-        y = gp.tileSize/4;
-        i = 0;
 
         // Draw current life
         while (i < gp.player.currentLife) {
@@ -90,6 +78,11 @@ public class UI {
                 g2.drawImage(heart.sprites[0], x, y, null);
             }
             i++;
+            x += gp.tileSize - gp.tileSize/4;
+        }
+        // Fill up the rest with blank hearts
+        for (int j = 0; j < Math.floor((double) (gp.player.maxLife - i) / 2); j++) {
+            g2.drawImage(heart.sprites[2], x, y, null);
             x += gp.tileSize - gp.tileSize/4;
         }
     }

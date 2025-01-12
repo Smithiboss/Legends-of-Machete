@@ -1,12 +1,17 @@
 package main;
 
-import entity.Player;
+import entities.Player;
 import tile.TileManager;
+import ui.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
-public class GamePanel extends JPanel implements Runnable{
+/**
+ * Manages game loop and drawing on the screen
+ */
+public class GamePanel extends JPanel implements Runnable {
 
     // Screen Settings
     static final int originalTileSize = 16; // 16x16 pixels
@@ -28,9 +33,15 @@ public class GamePanel extends JPanel implements Runnable{
     public int playerSpeed = 4; // calculates the speed in relation to the FPS
 
     Thread gameThread;
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
     public Player player = new Player(this, keyH);
     public TileManager tileM = new TileManager(this);
+    public UI ui = new UI(this);
+
+    // Game states
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
 
     public GamePanel() {
 
@@ -41,12 +52,22 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-    // creates and starts new Thread
+
+    public void setup_game() {
+        gameState = playState;
+    }
+
+    /**
+     * Creates and starts new game thread
+     */
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * Runs the game loop
+     */
     @Override
     public void run() {
 
@@ -78,19 +99,33 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
     }
-    // updates everything on the screen
-    public void update() {
 
-        player.update();
+    /**
+     * Calls update methods of game objects
+     */
+    public void update() {
+        
+        if (gameState == playState) {
+            player.update();
+        } else if (gameState == pauseState) {
+            // nothing yet
+        }
     }
-    // initializes graphics and draws everything in the screen
+
+    /**
+     * Calls draw methods of game objects
+     * @param g the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
+        // Draw tiles
         tileM.draw(g2);
+        // Draw player
         player.draw(g2);
+        ui.draw(g2);
         g2.dispose();
     }
 }

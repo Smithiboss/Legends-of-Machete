@@ -156,4 +156,8 @@ public class Player extends Entity{
         // drawHitbox(g2);
 
     }
+
+    public void resetDirection() {
+        direction = "none";
+    }
 }

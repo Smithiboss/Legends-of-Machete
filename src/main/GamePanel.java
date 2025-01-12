@@ -136,4 +136,9 @@ public class GamePanel extends JPanel implements Runnable {
             g2.dispose();
         }
     }
+
+    public void windowFocusLost() {
+        player.resetDirection();
+        gameState = pauseState;
+    }
 }
